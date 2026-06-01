@@ -1,4 +1,9 @@
-import { QuartzComponent, QuartzComponentConstructor, QuartzComponentProps } from "./types"
+import {
+  QuartzComponent,
+  QuartzComponentConstructor,
+  QuartzComponentProps,
+} from "./types"
+
 import { FullSlug, SimpleSlug, resolveRelative } from "../util/path"
 import { QuartzPluginData } from "../plugins/vfile"
 import { byDateAndAlphabetical } from "./PageList"
@@ -12,7 +17,6 @@ interface Options {
   title?: string
   limit: number
   linkToMore: SimpleSlug | false
-  showTags: boolean
   filter: (f: QuartzPluginData) => boolean
   sort: (f1: QuartzPluginData, f2: QuartzPluginData) => number
 }
@@ -20,7 +24,6 @@ interface Options {
 const defaultOptions = (cfg: GlobalConfiguration): Options => ({
   limit: 3,
   linkToMore: false,
-  showTags: true,
   filter: () => true,
   sort: byDateAndAlphabetical(cfg),
 })
@@ -33,50 +36,68 @@ export default ((userOpts?: Partial<Options>) => {
     cfg,
   }: QuartzComponentProps) => {
     const opts = { ...defaultOptions(cfg), ...userOpts }
-    const pages = allFiles.filter(opts.filter).sort(opts.sort)
+
+    const pages = allFiles
+      .filter(opts.filter)
+      .filter((f: any) => {
+        const slug = f.slug ?? ""
+
+        // ❌ 排除首页
+        if (slug === "index") return false
+
+        // ❌ 排除文件夹 index
+        if (slug.endsWith("/index")) return false
+
+        // ❌ 排除根目录文件
+        if (!slug.includes("/")) return false
+
+        return true
+      })
+      .sort(opts.sort)
+
     const remaining = Math.max(0, pages.length - opts.limit)
+
     return (
       <div class={classNames(displayClass, "recent-notes")}>
-        <h3>{opts.title ?? i18n(cfg.locale).components.recentNotes.title}</h3>
+
+        {/* 标题 */}
+        <h3 class="recent-title">
+          {opts.title ?? i18n(cfg.locale).components.recentNotes.title}
+        </h3>
+
         <ul class="recent-ul">
           {pages.slice(0, opts.limit).map((page) => {
-            const title = page.frontmatter?.title ?? i18n(cfg.locale).propertyDefaults.title
-            const tags = page.frontmatter?.tags ?? []
+            const title =
+              page.frontmatter?.title ??
+              i18n(cfg.locale).propertyDefaults.title
 
             return (
               <li class="recent-li">
-                <div class="section">
-                  <div class="desc">
-                    <h3>
-                      <a href={resolveRelative(fileData.slug!, page.slug!)} class="internal">
-                        {title}
-                      </a>
-                    </h3>
-                  </div>
+
+                <div class="row">
+
+                  {/* 标题 */}
+                  <a
+                    href={resolveRelative(fileData.slug!, page.slug!)}
+                    class="title"
+                  >
+                    {title}
+                  </a>
+
+                  {/* 时间 */}
                   {page.dates && (
-                    <p class="meta">
+                    <span class="meta">
                       <Date date={getDate(cfg, page)!} locale={cfg.locale} />
-                    </p>
+                    </span>
                   )}
-                  {opts.showTags && (
-                    <ul class="tags">
-                      {tags.map((tag) => (
-                        <li>
-                          <a
-                            class="internal tag-link"
-                            href={resolveRelative(fileData.slug!, `tags/${tag}` as FullSlug)}
-                          >
-                            {tag}
-                          </a>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
+
                 </div>
+
               </li>
             )
           })}
         </ul>
+
         {opts.linkToMore && remaining > 0 && (
           <p>
             <a href={resolveRelative(fileData.slug!, opts.linkToMore)}>
@@ -84,10 +105,40 @@ export default ((userOpts?: Partial<Options>) => {
             </a>
           </p>
         )}
+
       </div>
     )
   }
 
-  RecentNotes.css = style
+  RecentNotes.css = style + `
+    .recent-notes {
+      font-size: clamp(1rem, 1.2vw, 1.25rem);
+    }
+
+    .recent-title {
+      font-size: 1.3em;
+      font-weight: 700;
+      margin-bottom: 0.8rem;
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .title {
+      justify-self: start;
+      text-decoration: none;
+    }
+
+    .meta {
+      justify-self: end;
+      white-space: nowrap;
+      opacity: 0.6;
+    }
+  `
+
   return RecentNotes
 }) satisfies QuartzComponentConstructor

@@ -1,3 +1,225 @@
 @use "./base.scss";
 
 // put your custom CSS here!
+
+span.annotation {
+  color: #c0392b;
+  font-size: 0.85em;
+  font-family: "Garamond", "Source Han Serif SC", serif;
+}
+
+/* 编辑模式稍微弱化 */
+.cm-s-obsidian span.annotation {
+  opacity: 0.6;
+}
+
+/* 1. 全局正文 */
+body {
+  font-family: "Garamond", "Source Han Serif SC", serif !important;
+  font-weight: 400;
+}
+
+/* 2. 标题系统 */
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Garamond", "Source Han Serif SC", serif !important;
+  font-weight: 600;
+}
+
+/* 3. sidebar / 目录 */
+.sidebar, .sidebar * {
+  font-family: "Garamond", "Source Han Serif SC", serif !important;
+  font-weight: 400;
+}
+
+/* 4. 网站标题 */
+.page-title, .site-title {
+  font-family: "Garamond", "Source Han Serif SC", serif !important;
+  font-weight: 600;
+  font-size: 1.8rem;
+  margin-top: 0rem;
+}
+
+// Explorer 中 home 加粗
+.explorer a[href$="home"] {
+  font-weight: 1000;
+}
+
+/* 隐藏 index 页时间 */
+body[data-slug="index"] .content-meta,
+body[data-slug="index"] .timestamp {
+  display: none !important;
+}
+
+
+/* 默认隐藏 */
+.recent-notes {
+  display: none;
+}
+
+/* 只在首页显示 */
+body[data-slug="index"] .recent-notes {
+  display: block;
+}
+
+/* heatmap 标题 */
+.heatmap h3 {
+  margin-bottom: 0.5rem;
+  margin-top: 0rem;
+  font-size: 1rem;
+}
+
+.heatmap {
+  margin-bottom: 0rem;
+  margin-top: 0rem;
+}
+
+/* grid */
+.heatmap-grid {
+  display: grid;
+  grid-template-columns: repeat(10, 12px);
+  gap: 4px;
+}
+
+/* 灰色（无笔记） */
+.heat-cell {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  background: #e6e6e6;
+}
+
+/* 红色（有笔记） */
+.heat-cell.active {
+  background: #ff4d4d;
+}
+
+.heatmap-wrapper {
+  display: flex;
+  align-items: center;   /* ⭐ 整体垂直居中 */
+  gap: 2rem;
+  margin-bottom: 0rem;
+}
+
+/* 左侧 heatmap */
+.heatmap {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+
+/* 右侧 legend */
+.heatmap-legend {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* ⭐ 垂直居中 */
+  font-size: 0.85rem;
+  color: #666;
+  gap: 0.5rem;
+}
+
+/* 每一行 */
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  line-height: 1;
+  height: 18px;
+}
+
+/* 方块 */
+.legend-item .box {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+
+
+.legend-item .box.empty {
+  background: #e6e6e6;
+}
+
+.legend-item .box.active {
+  background: #ff4d4d;
+}
+
+.home-title {
+  margin-top: 0rem;
+}
+
+h1 {
+  margin-top: 0rem;
+}
+
+.home-banner {
+  width: 100%;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.home-banner + h1,
+.home-banner + h2,
+.home-banner + h3 {
+  margin-top: 0;
+}
+
+
+
+.home-banner img {
+  width: 100%;
+  max-height: 220px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.writing-stats {
+  width: 100%;
+   margin-top: 0rem;
+}
+
+.writing-stats h3 {
+  font-size: 13px;
+  margin-bottom: 8px;
+}
+
+.stat-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  margin-bottom: 6px;
+}
+
+.top-words {
+  width: 100%;
+}
+
+.top-words h3 {
+  font-size: 13px;
+  margin-bottom: 8px;
+}
+
+.top-words-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.top-word-item {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+}
+
+.word {
+  color: rgba(239, 68, 68, 0.9);
+}
+
+.count {
+  opacity: 0.6;
+}
+
+[saved-theme="dark"] .home-banner img {
+  filter: invert(1);
+}
+
