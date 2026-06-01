@@ -167,6 +167,11 @@ export default (() => {
     .folder-explorer::-webkit-scrollbar-track {
       background: transparent;
     }
+
+    .folder-list {
+  display: flex;
+  flex-direction: column;
+}
   `
 
   return FolderExplorer

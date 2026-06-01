@@ -223,3 +223,50 @@ h1 {
   filter: invert(1);
 }
 
+/* #手机排版问题 */
+
+@media (max-width: 768px) {
+
+  .page {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .sidebar-left,
+  .sidebar-right {
+    width: 100%;
+    position: relative;
+  }
+
+  .page-content {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .sidebar-left,
+  .sidebar-right {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .sidebar-left * ,
+  .sidebar-right * {
+    flex-direction: column !important;
+    flex-wrap: nowrap !important;
+    white-space: normal;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .heatmap-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px;
+  }
+
+}
+
+
