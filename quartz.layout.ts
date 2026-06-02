@@ -29,12 +29,14 @@ export const sharedPageComponents: SharedLayout = {
 export const defaultContentPageLayout: PageLayout = {
   beforeBody: [
   Component.HomeBanner(),
-    Component.ConditionalRender({
-      component: Component.Breadcrumbs(),
-      condition: (page) => page.fileData.slug !== "index",
-    }),
+  Component.ConditionalRender({
+  component: Component.ContentMeta(),
+  condition: (page) => {
+    const slug = page.fileData.slug ?? ""
+    return slug !== "index" && !slug.startsWith("all-notes")
+  },
+}),
     Component.ArticleTitle(),
-    Component.ContentMeta(),
     Component.TagList(),
   ],
   left: [

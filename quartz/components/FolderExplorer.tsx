@@ -22,28 +22,34 @@ export default (() => {
     const folderCounts: Record<string, number> = {}
     const folderMeta: Record<string, FolderItem> = {}
 
+    // ⭐ 全部文章数量（排除 index）
+    const totalPosts = allFiles.filter(f => {
+  const slug = f.slug ?? ""
+
+  return !(
+    slug === "index" ||
+    slug.endsWith("/index") ||
+    slug.startsWith("all-notes")
+  )
+}).length
+
     for (const file of allFiles) {
       const slug = file.slug ?? ""
 
-      // 跳过全站 index
       if (slug === "index") continue
 
       const parts = slug.split("/")
       const folder = parts[0]
-
       const isIndexFile = slug.endsWith("/index")
 
-      // 初始化计数
       if (!folderCounts[folder]) {
         folderCounts[folder] = 0
       }
 
-      // 只统计非 index 文件
       if (!isIndexFile) {
         folderCounts[folder]++
       }
 
-      // 只用 folder/index 作为入口
       if (!isIndexFile) continue
 
       const rawDate =
@@ -66,7 +72,7 @@ export default (() => {
       count: folderCounts[folder] ?? 0,
     }))
 
-    // 按时间排序（新 → 旧）
+    // ⭐ 按时间排序（新 → 旧）
     folders.sort((a, b) => b.date - a.date)
 
     return (
@@ -76,13 +82,21 @@ export default (() => {
 
         <div class="folder-list">
 
-          {/* 首页 */}
+          {/* 主页 */}
           <a href="/" class="folder-link">
             <span class="folder-arrow">▶</span>
             <span class="folder-name">主页</span>
           </a>
 
-          {/* 文件夹 */}
+          {/* ⭐ 全部文章（带数量） */}
+          <a href="/all-notes" class="folder-link all-notes">
+            <span class="folder-arrow">▶</span>
+            <span class="folder-name">
+              全部文章 ({totalPosts})
+            </span>
+          </a>
+
+          {/* 文件夹列表 */}
           {folders.map((folder) => (
             <a href={folder.slug} class="folder-link">
               <span class="folder-arrow">▶</span>
@@ -106,10 +120,6 @@ export default (() => {
       padding-right: 0.25rem;
     }
 
-    .folder-explorer h3 {
-      margin-bottom: 0.8rem;
-    }
-
     .folder-list {
       display: flex;
       flex-direction: column;
@@ -131,10 +141,7 @@ export default (() => {
       padding: 0.32rem 0.55rem;
       border-radius: 6px;
 
-      transition:
-        background-color 0.16s ease,
-        transform 0.16s ease,
-        opacity 0.16s ease;
+      transition: all 0.16s ease;
     }
 
     .folder-link:hover {
@@ -155,67 +162,52 @@ export default (() => {
       flex: 1;
     }
 
-    .folder-explorer::-webkit-scrollbar {
-      width: 6px;
+    .all-notes {
+      font-weight: 800;
+      background: none;
+      border-radius: 8px;
     }
 
-    .folder-explorer::-webkit-scrollbar-thumb {
-      background: rgba(255,255,255,0.08);
-      border-radius: 999px;
+    .all-notes-page a {
+      font-size: 1.05rem;
+      line-height: 1.9;
+      display: block;
+      padding: 0.15rem 0;
     }
 
-    .folder-explorer::-webkit-scrollbar-track {
-      background: transparent;
+    @media (max-width: 768px) {
+
+      .folder-list {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 0.25rem;
+      }
+
+      .folder-link {
+        width: 100%;
+        font-size: 1rem;
+        padding: 0.4rem 0.5rem;
+        border-radius: 8px;
+      }
+
+      .folder-arrow {
+        font-size: 0.6rem;
+        opacity: 0.7;
+      }
+
+      .folder-name {
+        font-size: 1rem;
+        flex: unset;
+        line-height: 1.1;
+      }
+
+      .folder-explorer {
+        width: 100%;
+        padding-left: 0;
+        padding-right: 0;
+      }
     }
-
-@media (max-width: 768px) {
-
-  .folder-list {
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 0.25rem;
-
-    /* ✅ 关键：整体靠左 */
-    justify-content: start;
-    justify-items: start;
-    align-content: start;
-  }
-
-  .folder-link {
-    width: 100%;
-    font-size: 1rem;
-    padding: 0.4rem 0.5rem;
-
-    /* 更紧凑 */
-    border-radius: 8px;
-  }
-
-  .folder-arrow {
-     background: none !important;
-  color: inherit;
-  font-size: 0.6rem;
-  opacity: 0.7;
-  display: inline;
-  }
-
-  .folder-name {
-    font-size: 1rem; 
-    flex: unset;
-    line-height: 1.1;
-  }
-
-  .folder-explorer {
-    width: 100%;
-    padding-left: 0;
-    padding-right: 0;
-  }
- .folder-link {
-    padding: 0.35rem 0.5rem;
-    line-height: 1.1;     
-  }
-}
-
   `
 
   return FolderExplorer

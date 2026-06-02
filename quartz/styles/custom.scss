@@ -305,6 +305,21 @@ h1 {
   }
 }
 
+body[data-slug="all-notes"] article {
+  font-size: 1.1rem;
+}
 
+body[data-slug="all-notes"] a.internal-link {
+  background: transparent !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+}
 
+body[data-slug="all-notes"] p {
+  line-height: 2.2rem !important;
+}
+
+body[data-slug="all-notes"] a {
+  background: transparent !important;
+}
 
