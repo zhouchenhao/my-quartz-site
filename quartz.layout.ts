@@ -29,6 +29,7 @@ export const sharedPageComponents: SharedLayout = {
 export const defaultContentPageLayout: PageLayout = {
   beforeBody: [
   Component.HomeBanner(),
+  Component.ArticleTitle(),
   Component.ConditionalRender({
   component: Component.ContentMeta(),
   condition: (page) => {
@@ -36,7 +37,6 @@ export const defaultContentPageLayout: PageLayout = {
     return slug !== "index" && !slug.startsWith("all-notes")
   },
 }),
-    Component.ArticleTitle(),
     Component.TagList(),
   ],
   left: [
