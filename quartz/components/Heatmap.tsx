@@ -26,8 +26,15 @@ export default (() => {
     for (const f of allFiles) {
 
      // ❌ 排除所有 index.md
-     if (f.slug?.endsWith("/index") || f.slug === "index") {
-     continue
+     const slug = f.slug ?? ""
+
+     if (
+       slug === "index" ||
+       slug === "all-notes" ||
+       slug.endsWith("/index") ||
+       slug.startsWith("all-notes/")
+     ) {
+       continue
      }
      
      const dateKey = toDateKey(f.dates?.created)
