@@ -19,6 +19,41 @@ body {
   font-weight: 400;
 }
 
+:root {
+  --background: #f6f6f3;
+  --text-normal: #1a1a1a;
+  --text-muted: #666;
+}
+
+/* 背景统一 */
+body {
+  background-color: var(--background) !important;
+  color: var(--text-normal);
+}
+
+/* 文字层级 */
+p, li, span {
+  color: var(--text-normal);
+}
+
+/* muted text */
+.small, .muted {
+  color: var(--text-muted);
+}
+
+/* 图片 / WordCloud / Heatmap 线条变清晰 */
+img,
+svg,
+canvas {
+  opacity: 1 !important;
+  filter: contrast(1.15) brightness(1.05) !important;
+}
+
+/* 防止 Quartz 柔化 */
+* {
+  text-shadow: none;
+}
+
 /* 2. 标题系统 */
 h1, h2, h3, h4, h5, h6 {
   font-family: "Garamond", "Source Han Serif SC", serif !important;
@@ -168,8 +203,7 @@ h1 {
 
 .home-banner img {
   width: 100%;
-  max-height: 220px;
-  object-fit: cover;
+  height: auto;
   border-radius: 12px;
 }
 
@@ -224,49 +258,53 @@ h1 {
 }
 
 /* #手机排版问题 */
+@media screen and (max-width: 800px) {
 
-@media (max-width: 768px) {
-
-  .page {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .sidebar-left,
-  .sidebar-right {
-    width: 100%;
-    position: relative;
-  }
-
-  .page-content {
-    width: 100%;
-  }
-}
-
-@media (max-width: 768px) {
-
-  .sidebar-left,
-  .sidebar-right {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .sidebar-left * ,
-  .sidebar-right * {
+  .left.sidebar {
+    display: flex !important;
     flex-direction: column !important;
-    flex-wrap: nowrap !important;
-    white-space: normal;
+    width: 100% !important;
+  }
+
+}
+
+@media screen and (max-width: 800px) {
+  .page-title {
+    font-size: 1.3rem;
   }
 }
 
 @media (max-width: 768px) {
 
-  .heatmap-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2px;
+  /* 右侧栏整体改为竖排 */
+  .right.sidebar {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
   }
 
+  .right.sidebar > * {
+    width: 100%;
+    margin-bottom: 0.6rem;
+  }
 }
+
+@media (max-width: 768px) {
+
+  .right.sidebar {
+    border-top: 1px solid rgba(120, 120, 120, 0.18) !important;
+    margin-top: 0.8rem;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .right.sidebar > *:first-child,
+  .right.sidebar > *:first-child > * {
+    margin-top: 1rem !important;
+  }
+}
+
+
 
 

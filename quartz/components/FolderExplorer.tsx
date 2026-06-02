@@ -102,7 +102,7 @@ export default (() => {
     .folder-explorer {
       font-size: 0.92rem;
       max-height: calc(100vh - 6rem);
-      overflow-y: auto;
+      overflow: visible !important;
       padding-right: 0.25rem;
     }
 
@@ -168,10 +168,50 @@ export default (() => {
       background: transparent;
     }
 
-    .folder-list {
-  display: flex;
-  flex-direction: column;
+@media (max-width: 768px) {
+
+  .folder-list {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.25rem;
+
+    /* ✅ 关键：整体靠左 */
+    justify-content: start;
+    justify-items: start;
+    align-content: start;
+  }
+
+  .folder-link {
+    width: 100%;
+    font-size: 1rem;
+    padding: 0.4rem 0.5rem;
+
+    /* 更紧凑 */
+    border-radius: 8px;
+  }
+
+  .folder-arrow {
+    display: none; /* 手机端更干净 */
+  }
+
+  .folder-name {
+    font-size: 1rem; 
+    flex: unset;
+    line-height: 1.1;
+  }
+
+  .folder-explorer {
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+  }
+ .folder-link {
+    padding: 0.35rem 0.5rem;
+    line-height: 1.1;     
+  }
 }
+
   `
 
   return FolderExplorer

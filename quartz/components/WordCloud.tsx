@@ -35,7 +35,7 @@ export default ((opts?: any) => {
 
   .wordcloud-title {
     font-size: 0.85rem;
-    color: rgba(0,0,0,0.72);
+    color: var(--text-normal);
     margin-bottom: 0.5rem;
     text-align: left;
     letter-spacing: 0.05em;
@@ -50,6 +50,5 @@ export default ((opts?: any) => {
     object-fit: contain;
   }
   `
-
   return WordCloud
 }) satisfies QuartzComponentConstructor
