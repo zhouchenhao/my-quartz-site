@@ -192,9 +192,11 @@ export default (() => {
   }
 
   .folder-arrow {
-   display: inline-block;
-  font-size: 0.5rem;
+     background: none !important;
+  color: inherit;
+  font-size: 0.6rem;
   opacity: 0.7;
+  display: inline;
   }
 
   .folder-name {
