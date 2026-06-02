@@ -335,35 +335,18 @@ body[data-slug="all-notes"] a {
   }
 
   main, .page, .content {
-    max-width: 100% !important;
     overflow-x: hidden !important;
   }
 
+  @media (max-width: 768px) {
+
   article {
-    width: 100% !important;
     max-width: 100% !important;
-    padding: 0 1rem !important;
+    width: 100% !important;
+
+    padding-left: 0.5rem !important;
+    padding-right: 0.5rem !important;
+
     box-sizing: border-box !important;
-
-    /* ⭐ 关键：禁止字被拉开 */
-    letter-spacing: 0 !important;
-    word-spacing: normal !important;
-
-    /* ⭐ 手机端不要强 justify（会变稀） */
-    text-align: left !important;
-  }
-
-  /* =========================
-     2. 防止任何元素撑破屏幕
-  ========================= */
-  * {
-    max-width: 100%;
-  }
-
-  /* =========================
-     3. 代码/长链接防溢出
-  ========================= */
-  pre, code, table {
-    overflow-x: auto !important;
   }
 }
