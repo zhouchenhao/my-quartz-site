@@ -323,3 +323,14 @@ body[data-slug="all-notes"] a {
   background: transparent !important;
 }
 
+@media (max-width: 768px) {
+  article {
+    max-width: 100% !important;
+    padding: 0 1rem !important;
+  }
+
+  main {
+    padding-right: 0 !important;
+  }
+}
+
