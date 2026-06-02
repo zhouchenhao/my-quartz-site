@@ -92,7 +92,7 @@ export default (() => {
           <a href="/all-notes" class="folder-link all-notes">
             <span class="folder-arrow">▶</span>
             <span class="folder-name">
-              全部文章 ({totalPosts})
+              总览 ({totalPosts})
             </span>
           </a>
 
@@ -166,13 +166,6 @@ export default (() => {
       font-weight: 800;
       background: none;
       border-radius: 8px;
-    }
-
-    .all-notes-page a {
-      font-size: 1.05rem;
-      line-height: 1.9;
-      display: block;
-      padding: 0.15rem 0;
     }
 
     @media (max-width: 768px) {
