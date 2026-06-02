@@ -192,7 +192,9 @@ export default (() => {
   }
 
   .folder-arrow {
-    display: none; /* 手机端更干净 */
+   display: inline-block;
+  font-size: 0.5rem;
+  opacity: 0.7;
   }
 
   .folder-name {

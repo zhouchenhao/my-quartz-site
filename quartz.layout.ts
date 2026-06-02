@@ -15,7 +15,7 @@ export const sharedPageComponents: SharedLayout = {
   afterBody: [
   Component.RecentNotes({
     title: "最新笔记",
-    limit: 3,
+    limit: 5,
   })],
   footer: Component.Footer({
     links: {
