@@ -323,14 +323,61 @@ body[data-slug="all-notes"] a {
   background: transparent !important;
 }
 
+
+/* =========================
+   1. 正文两端对齐
+========================= */
+article p {
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+/* =========================
+   2. PC + Mobile 统一正文宽度
+========================= */
+article {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 1.2rem;
+  line-height: 1.8;
+}
+
+/* =========================
+   3. 手机端专项优化
+========================= */
 @media (max-width: 768px) {
-  article {
-    max-width: 100% !important;
-    padding: 0 1rem !important;
-  }
 
   main {
-    padding-right: 0 !important;
+    display: block !important;
+    padding: 0 !important;
+  }
+
+  article {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 1rem !important;
+    margin: 0 auto !important;
+  }
+
+  /* 隐藏右侧栏（避免空白感） */
+  .sidebar.right,
+  .right-sidebar {
+    display: none !important;
+  }
+
+  /* 避免内容被挤压导致右侧空白 */
+  .page,
+  .content,
+  .center {
+    max-width: 100% !important;
   }
 }
 
+/* =========================
+   4. 防止 Quartz 默认 link 背景影响阅读
+========================= */
+.internal-link {
+  background: transparent !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+}
