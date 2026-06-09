@@ -4,7 +4,7 @@ import {
   QuartzComponentProps,
 } from "./types"
 
-import { FullSlug, SimpleSlug, resolveRelative } from "../util/path"
+import { SimpleSlug, resolveRelative } from "../util/path"
 import { QuartzPluginData } from "../plugins/vfile"
 import { byDateAndAlphabetical } from "./PageList"
 import style from "./styles/recentNotes.scss"
@@ -71,20 +71,30 @@ export default ((userOpts?: Partial<Options>) => {
               page.frontmatter?.title ??
               i18n(cfg.locale).propertyDefaults.title
 
+            const slug = page.slug ?? ""
+
+            // 取父文件夹名称
+            const folder = slug.includes("/")
+              ? slug.split("/").slice(0, -1).pop()
+              : ""
+
             return (
               <li class="recent-li">
-
                 <div class="row">
 
-                  {/* 标题 */}
                   <a
                     href={resolveRelative(fileData.slug!, page.slug!)}
                     class="title"
                   >
-                    {title}
+                    <span class="note-title">{title}</span>
+
+                    {folder && (
+                      <span class="folder-tag">
+                        {" "}{"{"}{folder}{"}"}
+                      </span>
+                    )}
                   </a>
 
-                  {/* 时间 */}
                   {page.dates && (
                     <span class="meta">
                       <Date date={getDate(cfg, page)!} locale={cfg.locale} />
@@ -92,7 +102,6 @@ export default ((userOpts?: Partial<Options>) => {
                   )}
 
                 </div>
-
               </li>
             )
           })}
@@ -137,6 +146,12 @@ export default ((userOpts?: Partial<Options>) => {
       justify-self: end;
       white-space: nowrap;
       opacity: 0.6;
+    }
+
+    .folder-tag {
+      color: rgba(120, 120, 120, 0.75);
+      font-size: 0.9em;
+      margin-left: 0.35em;
     }
   `
 
