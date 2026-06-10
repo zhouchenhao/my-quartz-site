@@ -302,14 +302,6 @@ h1 {
     display: none !important;
   }
 
-  /* =========================
-     3. 只显示 WordCloud
-  ========================= */
-  .right.sidebar .wordcloud,
-  .right.sidebar .WordCloud,
-  .right.sidebar [class*="wordcloud"] {
-    display: block !important;
-  }
 
   /* =========================
      4. 防止内容溢出

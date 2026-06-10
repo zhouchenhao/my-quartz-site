@@ -4,6 +4,7 @@ import Heatmap from "./quartz/components/Heatmap"
 import WritingStats from "./quartz/components/WritingStats"
 import FolderExplorer from "./quartz/components/FolderExplorer"
 import WordCloud from "./quartz/components/WordCloud"
+import BackToFolder from "./quartz/components/BackToFolder"
 
 const isHome = (page: any) =>
   page.fileData.filePath?.endsWith("index.md")
@@ -31,9 +32,18 @@ export const defaultContentPageLayout: PageLayout = {
       title: "最新笔记",
       limit: 5,
     }),
+    Component.ConditionalRender({
+  component: Component.Breadcrumbs(),
+  condition: (page) => {
+    const slug = page.fileData.slug ?? ""
 
+    return (
+      slug !== "index" &&
+      !slug.endsWith("/index")
+    )
+  },
+}),
     Component.ArticleTitle(),
-
     Component.ConditionalRender({
       component: Component.ContentMeta(),
       condition: (page) => {
