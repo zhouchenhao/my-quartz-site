@@ -12,11 +12,7 @@ const isHome = (page: any) =>
 export const sharedPageComponents: SharedLayout = {
   head: Component.Head(),
   header: [],
-  afterBody: [
-  Component.RecentNotes({
-    title: "最新笔记",
-    limit: 5,
-  })],
+  afterBody: [],
   footer: Component.Footer({
     links: {
       GitHub: "https://github.com/jackyzha0/quartz",
@@ -25,20 +21,30 @@ export const sharedPageComponents: SharedLayout = {
   }),
 }
 
-// components for pages that display a single page (e.g. a single note)
+// components for pages that display a single page (home + notes)
 export const defaultContentPageLayout: PageLayout = {
   beforeBody: [
-  Component.HomeBanner(),
-  Component.ArticleTitle(),
-  Component.ConditionalRender({
-  component: Component.ContentMeta(),
-  condition: (page) => {
-    const slug = page.fileData.slug ?? ""
-    return slug !== "index" && !slug.startsWith("all-notes")
-  },
-}),
+    Component.HomeBanner(),
+
+    // ✅ 最新笔记（放在 HomeBanner 和 index.md 中间）
+    Component.RecentNotes({
+      title: "最新笔记",
+      limit: 5,
+    }),
+
+    Component.ArticleTitle(),
+
+    Component.ConditionalRender({
+      component: Component.ContentMeta(),
+      condition: (page) => {
+        const slug = page.fileData.slug ?? ""
+        return slug !== "index" && !slug.startsWith("all-notes")
+      },
+    }),
+
     Component.TagList(),
   ],
+
   left: [
     Component.PageTitle(),
     Component.MobileOnly(Component.Spacer()),
@@ -52,16 +58,23 @@ export const defaultContentPageLayout: PageLayout = {
     }),
     FolderExplorer(),
   ],
+
   right: [
-   Heatmap(),
-   WritingStats(),
-  WordCloud(),
+    Heatmap(),
+    WritingStats(),
+    WordCloud(),
   ],
 }
 
-// components for pages that display lists of pages  (e.g. tags or folders)
+// components for list pages (tags, folders, etc.)
 export const defaultListPageLayout: PageLayout = {
-  beforeBody: [Component.Breadcrumbs(), Component.ArticleTitle(), Component.ContentMeta(),Component.TagList()],
+  beforeBody: [
+    Component.Breadcrumbs(),
+    Component.ArticleTitle(),
+    Component.ContentMeta(),
+    Component.TagList(),
+  ],
+
   left: [
     Component.PageTitle(),
     Component.MobileOnly(Component.Spacer()),
@@ -75,5 +88,6 @@ export const defaultListPageLayout: PageLayout = {
     }),
     FolderExplorer(),
   ],
+
   right: [],
 }

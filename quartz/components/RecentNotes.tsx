@@ -42,13 +42,8 @@ export default ((userOpts?: Partial<Options>) => {
       .filter((f: any) => {
         const slug = f.slug ?? ""
 
-        // ❌ 排除首页
         if (slug === "index") return false
-
-        // ❌ 排除文件夹 index
         if (slug.endsWith("/index")) return false
-
-        // ❌ 排除根目录文件
         if (!slug.includes("/")) return false
 
         return true
@@ -60,7 +55,7 @@ export default ((userOpts?: Partial<Options>) => {
     return (
       <div class={classNames(displayClass, "recent-notes")}>
 
-        {/* 标题 */}
+        {/* ✅ 标题：最新笔记 */}
         <h3 class="recent-title">
           {opts.title ?? i18n(cfg.locale).components.recentNotes.title}
         </h3>
@@ -73,7 +68,6 @@ export default ((userOpts?: Partial<Options>) => {
 
             const slug = page.slug ?? ""
 
-            // 取父文件夹名称
             const folder = slug.includes("/")
               ? slug.split("/").slice(0, -1).pop()
               : ""
@@ -120,16 +114,29 @@ export default ((userOpts?: Partial<Options>) => {
   }
 
   RecentNotes.css = style + `
+    /* 外层整体 */
     .recent-notes {
-      font-size: clamp(1rem, 1.2vw, 1.25rem);
+      font-size: 1rem;
     }
 
+    /* ✅ 主标题：最新笔记（更大） */
     .recent-title {
-      font-size: 1.3em;
-      font-weight: 700;
-      margin-bottom: 0.8rem;
+      font-size: 1.1rem !important;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 1rem;
     }
 
+    /* ✅ 分割线（关键） */
+  .recent-notes::after {
+    content: "";
+    display: block;
+    height: 1px;
+    margin-top: 2rem;
+    background: rgba(120, 120, 120, 0.25);
+  }
+
+    /* 每一行布局 */
     .row {
       display: grid;
       grid-template-columns: 1fr auto;
@@ -138,19 +145,26 @@ export default ((userOpts?: Partial<Options>) => {
     }
 
     .title {
-      justify-self: start;
       text-decoration: none;
+      justify-self: start;
+    }
+
+    /* ✅ 文章标题（更小） */
+    .note-title {
+      font-size: 1rem;
+      font-weight: 500;
     }
 
     .meta {
       justify-self: end;
       white-space: nowrap;
       opacity: 0.6;
+      font-size: 0.85rem;
     }
 
     .folder-tag {
       color: rgba(120, 120, 120, 0.75);
-      font-size: 0.9em;
+      font-size: 0.85rem;
       margin-left: 0.35em;
     }
   `
