@@ -74,6 +74,8 @@ h1, h2, h3, h4, h5, h6 {
   margin-top: 0rem;
 }
 
+
+
 // Explorer 中 home 加粗
 .explorer a[href$="home"] {
   font-weight: 1000;
@@ -302,6 +304,14 @@ h1 {
     display: none !important;
   }
 
+  /* =========================
+     3. 只显示 WordCloud
+  ========================= */
+  .right.sidebar .wordcloud,
+  .right.sidebar .WordCloud,
+  .right.sidebar [class*="wordcloud"] {
+    display: block !important;
+  }
 
   /* =========================
      4. 防止内容溢出

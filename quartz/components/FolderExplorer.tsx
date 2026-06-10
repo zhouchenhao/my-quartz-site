@@ -199,6 +199,7 @@ export default (() => {
         width: 100%;
         padding-left: 0;
         padding-right: 0;
+        margin-bottom: 0.2rem;
       }
     }
   `
