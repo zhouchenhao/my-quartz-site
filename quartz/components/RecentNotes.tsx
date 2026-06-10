@@ -153,6 +153,7 @@ export default ((userOpts?: Partial<Options>) => {
     .note-title {
       font-size: 1rem;
       font-weight: 500;
+      color: #284B63;
     }
 
     .meta {

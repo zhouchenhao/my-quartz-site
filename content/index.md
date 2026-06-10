@@ -8,7 +8,9 @@ title: 关于这里
 我尤其喜欢写诗，或许会写一辈子吧。我把写诗看作是人生里最不可或缺的事，或者是生命的意义所在。写诗的过程特别像是把生活里的各种状态，有混乱、疼痛、沉重，有喜悦、温柔、热爱，一点点升华成为自己的勋章。那些诗意的捕捉和转换也是老天爷不可言说的馈赠。只要我还在写诗，还拥有诗意，我的当下就没有真正的遗憾，随即发生什么都无妨，这就是我的人生态度。
 
 这里是我真实存在过的证据， 它记录了我感受世界的方式，我的思想、审美、生命痕迹。我想把它留给你。  
-<div style="margin-left: 84%; text-align: center; opacity: 1;">
-昊子<br>  
-2026年6月1日  
+<div style="display: flex; justify-content: flex-end;">
+  <div style="text-align: center;">
+    昊子<br>
+    <span style="white-space: nowrap;">2026年6月1日</span>
+  </div>
 </div>
