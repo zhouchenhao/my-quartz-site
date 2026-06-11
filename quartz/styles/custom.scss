@@ -290,33 +290,43 @@ h1 {
     overflow-x: hidden !important;
   }
 
- article {
+  article {
     width: auto !important;
     max-width: none !important;
-    /* ⭐ 关键：不要再参与对齐 */
     padding: 0 !important;
     margin: 0 !important;
     box-sizing: border-box !important;
   }
 
   /* =========================
-     2. 先隐藏整个 right sidebar
+     2. right sidebar 纵向排列
   ========================= */
-  .right.sidebar > * {
+  .right.sidebar {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 1rem;
+    padding: 0.5rem 0.8rem;
+  }
+
+  /* =========================
+     3. 隐藏 heatmap ⭐关键
+  ========================= */
+  .right.sidebar .heatmap,
+  .right.sidebar [class*="heatmap"] {
     display: none !important;
   }
 
   /* =========================
-     3. 只显示 WordCloud
+     4. 保留 WordCloud + WritingStats
   ========================= */
-  .right.sidebar .WritingStats,
-  .right.sidebar .WordCloud,
+  .right.sidebar .wordcloud,
+  .right.sidebar .writing-stats,
   .right.sidebar [class*="wordcloud"] {
-    display: block !important;
+    display: flex !important;
   }
 
   /* =========================
-     4. 防止内容溢出
+     5. 防止溢出
   ========================= */
   pre, table, img, code {
     max-width: 100%;
