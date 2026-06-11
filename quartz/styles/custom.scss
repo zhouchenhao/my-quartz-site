@@ -278,59 +278,49 @@ h1 {
 
 @media (max-width: 768px) {
 
-  /* =========================
-     1. 防止左右滑
-  ========================= */
   html, body {
     overflow-x: hidden !important;
   }
 
   main, .page, .content {
     max-width: 100% !important;
-    overflow-x: hidden !important;
   }
 
   article {
     width: auto !important;
-    max-width: none !important;
     padding: 0 !important;
     margin: 0 !important;
-    box-sizing: border-box !important;
   }
 
-  /* =========================
-     2. right sidebar 纵向排列
-  ========================= */
+  /* ⭐ sidebar 纵向 */
   .right.sidebar {
     display: flex !important;
     flex-direction: column !important;
     gap: 1rem;
-    padding: 0.5rem 0.8rem;
   }
 
-  /* =========================
-     3. 隐藏 heatmap ⭐关键
-  ========================= */
+  /* ⭐ heatmap 隐藏 */
   .right.sidebar .heatmap,
   .right.sidebar [class*="heatmap"] {
     display: none !important;
   }
 
-  /* =========================
-     4. 保留 WordCloud + WritingStats
-  ========================= */
-  .right.sidebar .wordcloud,
-  .right.sidebar .writing-stats,
-  .right.sidebar [class*="wordcloud"] {
+  /* ⭐ stats 正确布局 */
+  .right.sidebar .writing-stats {
     display: flex !important;
+    flex-direction: column !important;
+    gap: 0.4rem;
   }
 
-  /* =========================
-     5. 防止溢出
-  ========================= */
-  pre, table, img, code {
-    max-width: 100%;
-    overflow-x: auto;
+  .right.sidebar .writing-stats .stat-row {
+    display: flex !important;
+    justify-content: space-between !important;
+    flex-wrap: wrap !important;
+    width: 100% !important;
+  }
+
+  .right.sidebar .writing-stats span {
+    white-space: normal !important;
   }
 }
 
