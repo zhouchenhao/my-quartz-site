@@ -276,39 +276,48 @@ h1 {
 
 @media (max-width: 768px) {
 
+  /* =========================
+     1. 防止左右滑
+  ========================= */
   html, body {
     overflow-x: hidden !important;
   }
 
-  /* ⭐ 统一容器（关键修复） */
   main, .page, .content {
     max-width: 100% !important;
-    padding: 0 !important;
-    margin: 0 !important;
     overflow-x: hidden !important;
   }
 
-  /* ⭐ 正文统一 padding（不要 0.8rem） */
-  article {
-    width: 100% !important;
-    max-width: 100% !important;
-    padding: 0 12px !important;
+ article {
+    width: auto !important;
+    max-width: none !important;
+    padding-left: 12px !important;
+    padding-right: 12px !important;
     box-sizing: border-box !important;
   }
 
-  /* ⭐ 防止右侧“忽大忽小” */
-  p, li, span {
-    overflow-wrap: anywhere;
-    word-break: break-word;
+  /* =========================
+     2. 先隐藏整个 right sidebar
+  ========================= */
+  .right.sidebar > * {
+    display: none !important;
   }
 
-  /* ⭐ 防止内容撑破布局 */
-  pre, table, img, code, svg {
-    max-width: 100% !important;
+  /* =========================
+     3. 只显示 WordCloud
+  ========================= */
+  .right.sidebar .wordcloud,
+  .right.sidebar .WordCloud,
+  .right.sidebar [class*="wordcloud"] {
+    display: block !important;
   }
 
-  svg {
-    display: block;
+  /* =========================
+     4. 防止内容溢出
+  ========================= */
+  pre, table, img, code {
+    max-width: 100%;
+    overflow-x: auto;
   }
 }
 
