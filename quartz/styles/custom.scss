@@ -100,7 +100,8 @@ body[data-slug="index"] .recent-notes {
 .heatmap h3 {
   margin-bottom: 0.5rem;
   margin-top: 0rem;
-  font-size: 1rem;
+  font-size: 0.95rem;
+  font-weight: 600;
 }
 
 .heatmap {
@@ -213,7 +214,8 @@ h1 {
 }
 
 .writing-stats h3 {
-  font-size: 13px;
+  font-size: 15px; /* ← 从13px → 15px */
+  font-weight: 600;
   margin-bottom: 8px;
 }
 
