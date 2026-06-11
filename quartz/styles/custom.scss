@@ -322,6 +322,19 @@ h1 {
   .right.sidebar .writing-stats span {
     white-space: normal !important;
   }
+
+  .writing-stats {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+
+  .writing-stats h3 {
+    margin-top: 0 !important;
+  }
+
+  .writing-stats:first-child {
+    margin-top: 0 !important;
+  }
 }
 
 body[data-slug="all-notes"] article {
