@@ -30,7 +30,7 @@ export const defaultContentPageLayout: PageLayout = {
     // ✅ 最新笔记（放在 HomeBanner 和 index.md 中间）
     Component.RecentNotes({
       title: "最新笔记",
-      limit: 8,
+      limit: 10,
     }),
     Component.ConditionalRender({
   component: Component.Breadcrumbs(),
