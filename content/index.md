@@ -13,7 +13,7 @@ title: 关于这里
 
 PS. 电脑上看效果最佳哦。
 
-联系邮箱：
+如有需要，请联系：
 cheer_hao@hotmail.com
 <div style="display: flex; justify-content: flex-end;">
   <div style="text-align: center;">
