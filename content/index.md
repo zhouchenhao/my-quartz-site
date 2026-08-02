@@ -12,6 +12,9 @@ title: 关于这里
 这里是我真实存在过的证据， 它记录了我感受世界的方式，我的思想、审美、生命痕迹。我想把它留给你。  
 
 PS. 电脑上看效果最佳哦。
+
+联系邮箱：
+cheer_hao@hotmail.com
 <div style="display: flex; justify-content: flex-end;">
   <div style="text-align: center;">
     昊子<br>
